@@ -8,7 +8,14 @@ package Resource;
 import Entities.Media;
 import Exception.ExceptionResponse;
 import Exception.WebAppException;
-import java.net.http.HttpResponse;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
+
 
 
 /**
@@ -22,6 +29,8 @@ public class MediaResource {
     public String url = URL;
     public String username = "";
     public String password = "";
+    
+    Gson gson = new GsonBuilder().create();
 
     //
     // Konstruktoren
@@ -46,7 +55,7 @@ public class MediaResource {
     /**
      *  Alle Medien anfragen.
      */
-    public Media[] findMedias() throws UnirestException, WebAppException {
+    public Media[] findAll() throws UnirestException, WebAppException {
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url)
                 .header("accept", "application/json")
@@ -64,7 +73,7 @@ public class MediaResource {
         }
 
         // Antwortdaten zurückgeben
-        return this.gson.fromJson(httpResponse.getBody(), Song[].class);
+        return this.gson.fromJson(httpResponse.getBody(), Media[].class);
     }
 
     
