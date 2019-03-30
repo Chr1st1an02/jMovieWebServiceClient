@@ -75,6 +75,34 @@ public class MediaResource {
         // Antwortdaten zurückgeben
         return this.gson.fromJson(httpResponse.getBody(), Media[].class);
     }
+    
+    
+    //Medium mit Id finden
+    
+    public Media findMedia(long id) throws WebAppException, UnirestException{
+        
+        // HTTP-Anfrage senden
+        HttpResponse<String> httpResponse = Unirest.get(this.url + id + "/")
+                .header("accept", "application/json")
+                .asString();
+
+        // Exception werfen, wenn der Server einen Fehler meldet
+        try {
+            ExceptionResponse er = this.gson.fromJson(httpResponse.getBody(), ExceptionResponse.class);
+
+            if (er.exception != null) {
+                throw new WebAppException(er);
+            }
+        } catch (JsonSyntaxException ex) {
+            // Okay, keine Fehlerdaten empfangen
+        }
+
+        // Antwortdaten zurückgeben
+        return this.gson.fromJson(httpResponse.getBody(), Media.class);
+        
+              
+    }
+    
 
     
 }
