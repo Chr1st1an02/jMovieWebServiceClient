@@ -5,7 +5,7 @@
  */
 package Main;
 
-import Entities.Media;
+import Entities.RESTMedia;
 import Exception.WebAppException;
 import Resource.MediaResource;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -23,25 +23,26 @@ public class Main {
     public static void main(String[] args) throws UnirestException, WebAppException{
         boolean quit = false;
 
-        while (!quit) {
+        //while (!quit) {
             // Alle Songs vom Server abrufen und anzeigen
             System.out.println("================");
             System.out.println("Alle Medien");
             System.out.println("================");
             System.out.println();
 
-            Media[] medias = mediaResource.findAll();
+            RESTMedia[] medias = mediaResource.findAll();
 
             if (medias != null) {
-                for (Media media : medias) {
-                    System.out.println("Titel:       " + media.title);
-                    System.out.println("Angelegt von:   " + media.owner.username);
+                for (RESTMedia media : medias) {
+                    System.out.println("Type:        "+ media.getType());
+                    System.out.println("Titel:       " + media.getTitle());
+                    System.out.println("Angelegt von:   " + media.getOwner().getUsername());
 
                     System.out.println();
                 }
             }
             
-        }
+        //}
     }
 }
 

@@ -5,7 +5,7 @@
  */
 package Resource;
 
-import Entities.Media;
+import Entities.RESTMedia;
 import Exception.ExceptionResponse;
 import Exception.WebAppException;
 import com.google.gson.Gson;
@@ -24,7 +24,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  */
 public class MediaResource {
     
-    public static final String URL = "https://localhost:8443/jMovie/api/Medias/";
+    public static final String URL = "http://localhost:8080/jMovie/api/Medias/";
 
     public String url = URL;
     public String username = "";
@@ -37,6 +37,7 @@ public class MediaResource {
     //
 
     public MediaResource() {
+        
     }
 
     public MediaResource(String url) {
@@ -55,7 +56,7 @@ public class MediaResource {
     /**
      *  Alle Medien anfragen.
      */
-    public Media[] findAll() throws UnirestException, WebAppException {
+    public RESTMedia[] findAll() throws UnirestException, WebAppException {
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url)
                 .header("accept", "application/json")
@@ -73,13 +74,13 @@ public class MediaResource {
         }
 
         // Antwortdaten zurückgeben
-        return this.gson.fromJson(httpResponse.getBody(), Media[].class);
+        return this.gson.fromJson(httpResponse.getBody(), RESTMedia[].class);
     }
     
     
     //Medium mit Id finden
     
-    public Media findMedia(long id) throws WebAppException, UnirestException{
+    public RESTMedia findMedia(long id) throws WebAppException, UnirestException{
         
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url + id + "/")
@@ -98,7 +99,7 @@ public class MediaResource {
         }
 
         // Antwortdaten zurückgeben
-        return this.gson.fromJson(httpResponse.getBody(), Media.class);
+        return this.gson.fromJson(httpResponse.getBody(), RESTMedia.class);
         
               
     }
