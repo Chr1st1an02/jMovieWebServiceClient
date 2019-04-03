@@ -24,7 +24,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  */
 public class MediaResource {
     
-    public static final String URL = "http://localhost:8080/jMovie/api/Medias/";
+    public static final String URL = "http://localhost:8080/jMovie/api/Medias";
 
     public String url = URL;
     public String username = "";
