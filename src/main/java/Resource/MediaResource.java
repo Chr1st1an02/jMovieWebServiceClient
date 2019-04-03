@@ -82,10 +82,10 @@ public class MediaResource {
     //Medium mit Id finden
     
     public RESTMedia findMedia(long id) throws WebAppException, UnirestException{
-        
         // HTTP-Anfrage senden
-        HttpResponse<String> httpResponse = Unirest.get(this.url + id + "/")
+        HttpResponse<String> httpResponse = Unirest.get(this.url + "/"+ id + "/")
                 .header("accept", "application/json")
+                .basicAuth(username, password)
                 .asString();
 
         // Exception werfen, wenn der Server einen Fehler meldet

@@ -21,10 +21,18 @@ public class Main {
     
     
     public static void main(String[] args) throws UnirestException, WebAppException{
-        boolean quit = false;
+        
         mediaResource.setAuthData("Mediargon", "123456");
-        //while (!quit) {
-            // Alle Songs vom Server abrufen und anzeigen
+        mediaFindAll();
+        
+        mediaFindById(50);
+            
+        
+            
+    }
+    
+    public static void mediaFindAll() throws UnirestException, WebAppException{
+        // Alle Medias vom Server abrufen und anzeigen
             System.out.println("================");
             System.out.println("Alle Medien");
             System.out.println("================");
@@ -42,8 +50,25 @@ public class Main {
                     System.out.println();
                 }
             }
-            
-        //}
+    }
+
+    private static void mediaFindById(long id) throws UnirestException, WebAppException{
+        //Media vom Server abrufen und anzeigen
+            System.out.println("================");
+            System.out.println("Media mit ID: "+id);
+            System.out.println("================");
+            System.out.println();
+
+            RESTMedia media = mediaResource.findMedia(id);
+
+            if (media != null) {
+                
+                System.out.println("Type:        "+ media.getType());
+                System.out.println("Titel:       " + media.getTitle());
+                System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                System.out.println();
+                
+            }
     }
 }
 
