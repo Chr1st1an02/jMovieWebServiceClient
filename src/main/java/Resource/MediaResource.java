@@ -60,6 +60,7 @@ public class MediaResource {
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url)
                 .header("accept", "application/json")
+                .basicAuth(username, password)
                 .asString();
 
         // Exception werfen, wenn der Server einen Fehler meldet

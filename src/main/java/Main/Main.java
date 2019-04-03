@@ -22,7 +22,7 @@ public class Main {
     
     public static void main(String[] args) throws UnirestException, WebAppException{
         boolean quit = false;
-
+        mediaResource.setAuthData("Mediargon", "123456");
         //while (!quit) {
             // Alle Songs vom Server abrufen und anzeigen
             System.out.println("================");
@@ -31,6 +31,7 @@ public class Main {
             System.out.println();
 
             RESTMedia[] medias = mediaResource.findAll();
+            
 
             if (medias != null) {
                 for (RESTMedia media : medias) {
