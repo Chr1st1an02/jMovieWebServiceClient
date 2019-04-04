@@ -82,6 +82,7 @@ public class MediaResource {
     //Medium mit Id finden
     
     public RESTMedia findMedia(long id) throws WebAppException, UnirestException{
+        System.out.println(this.url + "/"+ id + "/");
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url + "/"+ id + "/")
                 .header("accept", "application/json")
@@ -105,6 +106,37 @@ public class MediaResource {
               
     }
     
+    public RESTMedia[] find(String title, String genre, String status) throws UnirestException, WebAppException {
+        StringBuilder requestUrl = new StringBuilder(this.url+"/search/?");
+        if(title!= null){
+            requestUrl.append("title="+title+"&");
+        }
+        if(genre!= null){
+            requestUrl.append("genre="+genre+"&");
+        }
+        if(status!= null){
+            requestUrl.append("status="+status+"&");
+        }
+        System.out.println(requestUrl.toString());
+        // HTTP-Anfrage senden
+        HttpResponse<String> httpResponse = Unirest.get(requestUrl.toString())
+                .header("accept", "application/json")
+                .basicAuth(username, password)
+                .asString();
 
+        // Exception werfen, wenn der Server einen Fehler meldet
+        try {
+            ExceptionResponse er = this.gson.fromJson(httpResponse.getBody(), ExceptionResponse.class);
+
+            if (er.exception != null) {
+                throw new WebAppException(er);
+            }
+        } catch (JsonSyntaxException ex) {
+            // Okay, keine Fehlerdaten empfangen
+        }
+
+        // Antwortdaten zurückgeben
+        return this.gson.fromJson(httpResponse.getBody(), RESTMedia[].class);
+    }
     
 }

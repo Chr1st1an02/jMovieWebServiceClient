@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Entities.Genre;
 import Entities.RESTMedia;
 import Exception.WebAppException;
 import Resource.MediaResource;
@@ -24,11 +25,10 @@ public class Main {
         
         mediaResource.setAuthData("Mediargon", "123456");
         mediaFindAll();
-        
         mediaFindById(50);
+        mediaFind("HIMYM","Thriller",null);
             
-        
-            
+         
     }
     
     public static void mediaFindAll() throws UnirestException, WebAppException{
@@ -68,6 +68,28 @@ public class Main {
                 System.out.println("Angelegt von:   " + media.getOwner().getUsername());
                 System.out.println();
                 
+            }
+    }
+    private static void mediaFind(String title, String genre, String status) throws UnirestException, WebAppException{
+        //Media vom Server abrufen und anzeigen
+            System.out.println("================");
+            System.out.print("Media mit ");
+            System.out.print(" Title "+title);
+            System.out.print(" Genre "+genre);
+            System.out.println(" Status "+status);
+            System.out.println("================");
+            System.out.println();
+
+            RESTMedia[] medias = mediaResource.find(title, genre, status);
+
+            if (medias != null) {
+                for (RESTMedia media : medias) {
+                    System.out.println("Type:        "+ media.getType());
+                    System.out.println("Titel:       " + media.getTitle());
+                    System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+
+                    System.out.println();
+                }
             }
     }
 }
