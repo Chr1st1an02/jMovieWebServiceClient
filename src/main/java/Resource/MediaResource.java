@@ -22,13 +22,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
  *
  * @author D070429
  */
-public class MediaResource {
+public class MediaResource extends Resource{
     
     public static final String URL = "http://localhost:8080/jMovie/api/Medias";
 
     public String url = URL;
-    public String username = "";
-    public String password = "";
     
     Gson gson = new GsonBuilder().create();
 
@@ -44,14 +42,6 @@ public class MediaResource {
         this.url = url;
     }
 
-    //
-    // Benutzername und Passwort setzen
-    //
-
-    public void setAuthData(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
     
     /**
      *  Alle Medien anfragen.
@@ -81,8 +71,7 @@ public class MediaResource {
     
     //Medium mit Id finden
     
-    public RESTMedia findMedia(long id) throws WebAppException, UnirestException{
-        System.out.println(this.url + "/"+ id + "/");
+    public RESTMedia find(long id) throws WebAppException, UnirestException{
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(this.url + "/"+ id + "/")
                 .header("accept", "application/json")
@@ -117,7 +106,6 @@ public class MediaResource {
         if(status!= null){
             requestUrl.append("status="+status+"&");
         }
-        System.out.println(requestUrl.toString());
         // HTTP-Anfrage senden
         HttpResponse<String> httpResponse = Unirest.get(requestUrl.toString())
                 .header("accept", "application/json")
