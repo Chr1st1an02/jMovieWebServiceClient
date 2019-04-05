@@ -73,7 +73,7 @@ public class Main {
             System.out.print("Deine Auswahl: ");
             String command = fromKeyboard.readLine();
             
-            
+           
              switch (command.toUpperCase()) {
                 case "A":
                     mediaFindAll();
@@ -106,30 +106,39 @@ public class Main {
                     System.out.println();
                     System.out.print("Gebe den Titel an:  ");
                     title = fromKeyboard.readLine();
+                    title = title.isEmpty() ? null : title;
                     System.out.print("Gebe das Genre an:  ");
                     genre = fromKeyboard.readLine();
+                    genre = genre.isEmpty() ? null : genre;
                     System.out.print("Gebe den Status an:  ");
                     status = fromKeyboard.readLine();
+                    status = status.isEmpty() ? null : status;
                     mediaFind(title,genre,status);
                     break;
                 case "H":
                     System.out.println();
                     System.out.print("Gebe den Titel an:  ");
                     title = fromKeyboard.readLine();
+                    title = title.isEmpty() ? null : title;
                     System.out.print("Gebe das Genre an:  ");
                     genre = fromKeyboard.readLine();
+                    genre = genre.isEmpty() ? null : genre;
                     System.out.print("Gebe den Status an:  ");
                     status = fromKeyboard.readLine();
+                    status = status.isEmpty() ? null : status;
                     serieFind(title,genre,status);
                     break;
                 case "I":
                     System.out.println();
                     System.out.print("Gebe den Titel an:  ");
                     title = fromKeyboard.readLine();
+                    title = title.isEmpty() ? null : title;
                     System.out.print("Gebe das Genre an:  ");
                     genre = fromKeyboard.readLine();
+                    genre = genre.isEmpty() ? null : genre;
                     System.out.print("Gebe den Status an:  ");
                     status = fromKeyboard.readLine();
+                    status = status.isEmpty() ? null : status;
                     movieFind(title,genre,status);
                     break;
                 case "X":
@@ -137,12 +146,7 @@ public class Main {
                     quit = true;
                     break;
             }
-            
-            
-            
-            
-            
-            
+                 
         }
         
     }
