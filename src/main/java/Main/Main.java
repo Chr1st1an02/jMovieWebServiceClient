@@ -8,10 +8,12 @@ package Main;
 import Entities.Genre;
 import Entities.RESTEpisode;
 import Entities.RESTMedia;
+import Entities.RESTMovie;
 import Entities.RESTSeason;
 import Entities.RESTSerie;
 import Exception.WebAppException;
 import Resource.MediaResource;
+import Resource.MovieResource;
 import Resource.Resource;
 import Resource.SerieResource;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -25,11 +27,12 @@ public class Main {
     
     static MediaResource mediaResource = new MediaResource();
     static SerieResource serieResource = new SerieResource();
+    static MovieResource movieResource = new MovieResource();
     
     
     public static void main(String[] args) throws UnirestException, WebAppException{
         
-        Resource.setAuthData("Mediargon", "123456");
+        Resource.setAuthData("Christian", "123456");
         mediaFindAll();
         mediaFindById(50);
         mediaFind("HIMYM","Thriller",null);
@@ -49,6 +52,8 @@ public class Main {
             System.out.println("================");
             System.out.println();
 
+            
+            try{
             RESTMedia[] medias = mediaResource.findAll();
             
 
@@ -61,6 +66,12 @@ public class Main {
                     System.out.println();
                 }
             }
+            }
+             catch(NullPointerException nle){
+                System.out.println("Nix gefunden!!!");  
+                
+                 System.out.println();
+            }
     }
 
     private static void mediaFindById(long id) throws UnirestException, WebAppException{
@@ -69,9 +80,10 @@ public class Main {
             System.out.println("Media mit ID: "+id);
             System.out.println("================");
             System.out.println();
-
+            
+            try{
             RESTMedia media = mediaResource.find(id);
-
+            
             if (media != null) {
                 
                 System.out.println("Type:        "+ media.getType());
@@ -80,6 +92,14 @@ public class Main {
                 System.out.println();
                 
             }
+            }
+            catch(NullPointerException nle){
+                System.out.println("Nix gefunden!!!");  
+                
+                 System.out.println();
+            }
+
+           
     }
     private static void mediaFind(String title, String genre, String status) throws UnirestException, WebAppException{
         //Media vom Server abrufen und anzeigen
@@ -91,6 +111,9 @@ public class Main {
             System.out.println("================");
             System.out.println();
 
+            
+            
+            try{
             RESTMedia[] medias = mediaResource.find(title, genre, status);
 
             if (medias != null) {
@@ -102,6 +125,13 @@ public class Main {
                     System.out.println();
                 }
             }
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
     }
     
     public static void serieFindAll() throws UnirestException, WebAppException{
@@ -111,6 +141,7 @@ public class Main {
             System.out.println("================");
             System.out.println();
 
+            try{
             RESTSerie[] serien = serieResource.findAll();
             
 
@@ -130,6 +161,13 @@ public class Main {
                     System.out.println();
                 }
             }
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
     }
 
     private static void serieFindById(long id) throws UnirestException, WebAppException{
@@ -139,6 +177,8 @@ public class Main {
             System.out.println("================");
             System.out.println();
 
+            
+            try{
             RESTSerie serie = serieResource.find(id);
 
             if (serie != null) {
@@ -155,6 +195,14 @@ public class Main {
                 System.out.println();
                 
             }
+            
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
     }
     private static void serieFind(String title, String genre, String status) throws UnirestException, WebAppException{
         //Media vom Server abrufen und anzeigen
@@ -166,6 +214,8 @@ public class Main {
             System.out.println("================");
             System.out.println();
 
+            
+            try{
             RESTSerie[] serien = serieResource.find(title, genre, status);
 
             if (serien != null) {
@@ -184,7 +234,118 @@ public class Main {
                     System.out.println();
                 }
             }
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
     }
+    
+    
+    public static void movieFindAll() throws UnirestException, WebAppException{
+        // Alle Serien vom Server abrufen und anzeigen
+            System.out.println("================");
+            System.out.println("Alle Filme");
+            System.out.println("================");
+            System.out.println();
+
+            
+            try{
+            RESTMovie[] movies = movieResource.findAll();
+            
+
+            if (movies != null) {
+                for (RESTMovie movie : movies) {
+                    System.out.println("Type:        "+ movie.getType());
+                    System.out.println("Titel:       " + movie.getTitle());
+                    System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
+                    System.out.println("Dauer:   " + movie.getMovieLength());
+                    
+                    System.out.println();
+
+                    System.out.println();
+                }
+            }
+            
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
+    }
+
+    private static void movieFindById(long id) throws UnirestException, WebAppException{
+        //Media vom Server abrufen und anzeigen
+            System.out.println("================");
+            System.out.println("Film mit ID: "+id);
+            System.out.println("================");
+            System.out.println();
+
+            
+            try{
+            RESTMovie movie = movieResource.find(id);
+
+            if (movie!= null) {
+                
+              System.out.println("Type:        "+ movie.getType());
+                    System.out.println("Titel:       " + movie.getTitle());
+                    System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
+                    System.out.println("Dauer:   " + movie.getMovieLength());
+                    
+                    System.out.println();
+
+                    System.out.println();
+                
+            }
+            
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
+    }
+    private static void movieFind(String title, String genre, String status) throws UnirestException, WebAppException{
+        //Media vom Server abrufen und anzeigen
+            System.out.println("================");
+            System.out.print("Film mit ");
+            System.out.print(" Title "+title);
+            System.out.print(" Genre "+genre);
+            System.out.println(" Status "+status);
+            System.out.println("================");
+            System.out.println();
+
+            
+            try{
+            RESTMovie[] movies = movieResource.find(title, genre, status);
+
+            if (movies != null) {
+                for (RESTMovie movie : movies) {
+                    System.out.println("Type:        "+ movie.getType());
+                    System.out.println("Titel:       " + movie.getTitle());
+                    System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
+                    System.out.println("Dauer:   " + movie.getMovieLength());
+                    
+                    System.out.println();
+
+                    System.out.println();
+                }
+            }
+            }
+            catch(NullPointerException nle){
+                
+                System.out.print("Nix gefunden!!!");
+                 System.out.println();
+                
+            }
+    }
+    
+    
 }
 
            
