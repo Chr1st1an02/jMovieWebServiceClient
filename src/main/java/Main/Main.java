@@ -178,6 +178,10 @@ public class Main {
                     System.out.println("Type:        "+ media.getType());
                     System.out.println("Titel:       " + media.getTitle());
                     System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                    System.out.print("Genre: ");
+                    media.getGenres().forEach((genre) -> {
+                        System.out.print(genre.getName()+" ");
+                    });
 
                     System.out.println();
                 }
@@ -210,6 +214,9 @@ public class Main {
                 System.out.println("Type:        "+ media.getType());
                 System.out.println("Titel:       " + media.getTitle());
                 System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                media.getGenres().forEach((genre) -> {
+                    System.out.print(genre.getName()+" ");
+                });
                 System.out.println();
                 
             }
@@ -248,6 +255,9 @@ public class Main {
                     System.out.println("Type:        "+ media.getType());
                     System.out.println("Titel:       " + media.getTitle());
                     System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                    media.getGenres().forEach((mgenre) -> {
+                        System.out.print(mgenre.getName()+" ");
+                    });
 
                     System.out.println();
                 }
@@ -281,6 +291,10 @@ public class Main {
                     System.out.println("Type:        "+ serie.getType());
                     System.out.println("Titel:       " + serie.getTitle());
                     System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                    serie.getGenres().forEach((genre) -> {
+                        System.out.print(genre.getName()+" ");
+                    });
+                    System.out.println();
                     for(RESTSeason season : serie.getSeasons()){
                         System.out.println("  "+season.getNr()+". Staffel");
                         for(RESTEpisode episode : season.getEpisodes()){
@@ -321,6 +335,10 @@ public class Main {
                 System.out.println("Type:        "+ serie.getType());
                 System.out.println("Titel:       " + serie.getTitle());
                 System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                serie.getGenres().forEach((genre) -> {
+                        System.out.print(genre.getName()+" ");
+                    });
+                    System.out.println();
                 for(RESTSeason season : serie.getSeasons()){
                     System.out.println("  "+season.getNr()+". Staffel");
                     for(RESTEpisode episode : season.getEpisodes()){
@@ -364,6 +382,10 @@ public class Main {
                     System.out.println("Type:        "+ serie.getType());
                     System.out.println("Titel:       " + serie.getTitle());
                     System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                    serie.getGenres().forEach((sgenre) -> {
+                        System.out.print(sgenre.getName()+" ");
+                    });
+                    System.out.println();
                     for(RESTSeason season : serie.getSeasons()){
                         System.out.println("  "+season.getNr()+". Staffel");
                         for(RESTEpisode episode : season.getEpisodes()){
@@ -409,6 +431,9 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    movie.getGenres().forEach((genre) -> {
+                        System.out.print(genre.getName()+" ");
+                    });
                     
                     System.out.println();
 
@@ -446,6 +471,9 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    movie.getGenres().forEach((genre) -> {
+                        System.out.print(genre.getName()+" ");
+                    });
                     
                     System.out.println();
 
@@ -486,6 +514,9 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    movie.getGenres().forEach((mgenre) -> {
+                        System.out.print(mgenre.getName()+" ");
+                    });
                     
                     System.out.println();
 
