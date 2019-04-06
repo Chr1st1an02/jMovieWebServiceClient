@@ -98,7 +98,7 @@ public class MediaResource extends Resource{
     public RESTMedia[] find(String title, String genre, String status) throws UnirestException, WebAppException {
         StringBuilder requestUrl = new StringBuilder(this.url+"/search/?");
         if(title!= null){
-            requestUrl.append("title="+title+"&");
+            requestUrl.append("title="+title.replace(" ", "+")+"&");
         }
         if(genre!= null){
             requestUrl.append("genre="+genre+"&");
