@@ -184,6 +184,7 @@ public class Main {
                     });
 
                     System.out.println();
+                    System.out.println();
                 }
             }
             }
@@ -217,6 +218,7 @@ public class Main {
                 media.getGenres().forEach((genre) -> {
                     System.out.print(genre.getName()+" ");
                 });
+                System.out.println();
                 System.out.println();
                 
             }
@@ -259,6 +261,7 @@ public class Main {
                         System.out.print(mgenre.getName()+" ");
                     });
 
+                    System.out.println();
                     System.out.println();
                 }
             }
