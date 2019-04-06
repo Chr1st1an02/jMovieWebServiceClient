@@ -101,7 +101,7 @@ public class MediaResource extends Resource{
             requestUrl.append("title="+title.replace(" ", "+")+"&");
         }
         if(genre!= null){
-            requestUrl.append("genre="+genre+"&");
+            requestUrl.append("genre="+genre.replace(" ", "+")+"&");
         }
         if(status!= null){
             requestUrl.append("status="+status+"&");
