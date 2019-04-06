@@ -276,8 +276,8 @@ public class Main {
                  System.out.println();
             }
             catch(WebAppException e){
-                System.err.println("Es ist eine WebAppException "
-                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                System.err.println("Eine  WebAppException ist aufgetreten "
+                        + "\nvielleicht könnte es daran liegen, dass etwas mit Ihrer Eingabe nicht stimmt"
                         + "\n\n");
             }
     }
