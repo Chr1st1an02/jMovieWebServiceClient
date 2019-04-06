@@ -16,6 +16,7 @@ import Resource.MediaResource;
 import Resource.MovieResource;
 import Resource.Resource;
 import Resource.SerieResource;
+import com.google.gson.JsonSyntaxException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,113 +39,121 @@ public class Main {
     public static void main(String[] args) throws UnirestException, WebAppException, IOException{
         
         boolean quit = false;
+        boolean logedIn = false;
         String id;
         String title;
         String genre;
         String status;
         
-        
-        System.out.println("================");
-        System.out.println("Anmelden");
-        System.out.println("================");
-        System.out.println();
-        System.out.println("Name: ");
-        String name = fromKeyboard.readLine();
-        System.out.println();
-        System.out.println("Passwort: ");
-        String passwort = fromKeyboard.readLine();
-        System.out.println();
-        Resource.setAuthData(name, passwort);
-        
-        while(!quit){
-            
-            System.out.println("[A] Alle Medien anzeigen");
-            System.out.println("[B] Alle Serien anzeigen");
-            System.out.println("[C] Alle Filme anzeigen");
-            System.out.println("[D] Media mit Id suchen");
-            System.out.println("[E] Serie mit Id suchen");
-            System.out.println("[F] Film mit Id suchen");
-            System.out.println("[G] Media nach Titel, Genre und Status suchen");
-            System.out.println("[H] Serie nach Titel, Genre und Status suchen");
-            System.out.println("[I] Film nach Titel, Genre und Status suchen");
-            System.out.println("[X] Ende");
-            System.out.println();
+        while(!logedIn){
+            try{
+                System.out.println("================");
+                System.out.println("Anmelden");
+                System.out.println("================");
+                System.out.println();
+                System.out.println("Name: ");
+                String name = fromKeyboard.readLine().trim();
+                System.out.println();
+                System.out.println("Passwort: ");
+                String passwort = fromKeyboard.readLine().trim();
+                System.out.println();
+                Resource.setAuthData(name, passwort);
+                logedIn=true;
 
-            System.out.print("Deine Auswahl: ");
-            String command = fromKeyboard.readLine();
-            
-           
-             switch (command.toUpperCase()) {
-                case "A":
-                    mediaFindAll();
-                    break;
-                case "B":
-                    serieFindAll();
-                    break;
-                case "C":
-                    movieFindAll();
-                    break;
-                case "D":
+                while(!quit){
+                    System.out.println("[A] Alle Medien anzeigen");
+                    System.out.println("[B] Alle Serien anzeigen");
+                    System.out.println("[C] Alle Filme anzeigen");
+                    System.out.println("[D] Media mit Id suchen");
+                    System.out.println("[E] Serie mit Id suchen");
+                    System.out.println("[F] Film mit Id suchen");
+                    System.out.println("[G] Media nach Titel, Genre und Status suchen");
+                    System.out.println("[H] Serie nach Titel, Genre und Status suchen");
+                    System.out.println("[I] Film nach Titel, Genre und Status suchen");
+                    System.out.println("[X] Ende");
                     System.out.println();
-                    System.out.print("Gebe die Id an:  ");
-                    id = fromKeyboard.readLine();
-                    mediaFindById(Long.parseLong(id));
-                    break;
-                case "E":
-                    System.out.println();
-                    System.out.print("Gebe die Id an:  ");
-                    id = fromKeyboard.readLine();
-                    serieFindById(Long.parseLong(id));
-                    break;
-                case "F":
-                    System.out.println();
-                    System.out.print("Gebe die Id an:  ");
-                    id = fromKeyboard.readLine();
-                    movieFindById(Long.parseLong(id));
-                    break;
-                case "G":
-                    System.out.println();
-                    System.out.print("Gebe den Titel an:  ");
-                    title = fromKeyboard.readLine();
-                    title = title.isEmpty() ? null : title;
-                    System.out.print("Gebe das Genre an:  ");
-                    genre = fromKeyboard.readLine();
-                    genre = genre.isEmpty() ? null : genre;
-                    System.out.print("Gebe den Status an:  ");
-                    status = fromKeyboard.readLine();
-                    status = status.isEmpty() ? null : status;
-                    mediaFind(title,genre,status);
-                    break;
-                case "H":
-                    System.out.println();
-                    System.out.print("Gebe den Titel an:  ");
-                    title = fromKeyboard.readLine();
-                    title = title.isEmpty() ? null : title;
-                    System.out.print("Gebe das Genre an:  ");
-                    genre = fromKeyboard.readLine();
-                    genre = genre.isEmpty() ? null : genre;
-                    System.out.print("Gebe den Status an:  ");
-                    status = fromKeyboard.readLine();
-                    status = status.isEmpty() ? null : status;
-                    serieFind(title,genre,status);
-                    break;
-                case "I":
-                    System.out.println();
-                    System.out.print("Gebe den Titel an:  ");
-                    title = fromKeyboard.readLine();
-                    title = title.isEmpty() ? null : title;
-                    System.out.print("Gebe das Genre an:  ");
-                    genre = fromKeyboard.readLine();
-                    genre = genre.isEmpty() ? null : genre;
-                    System.out.print("Gebe den Status an:  ");
-                    status = fromKeyboard.readLine();
-                    status = status.isEmpty() ? null : status;
-                    movieFind(title,genre,status);
-                    break;
-                case "X":
-                    System.out.println("Bye, bye!");
-                    quit = true;
-                    break;
+
+                    System.out.print("Deine Auswahl: ");
+                    String command = fromKeyboard.readLine().trim();
+
+
+                    switch (command.toUpperCase()) {
+                        case "A":
+                            mediaFindAll();
+                            break;
+                        case "B":
+                            serieFindAll();
+                            break;
+                        case "C":
+                            movieFindAll();
+                            break;
+                        case "D":
+                            System.out.println();
+                            System.out.print("Gebe die Id an:  ");
+                            id = fromKeyboard.readLine().trim();
+                            mediaFindById(Long.parseLong(id));
+                            break;
+                        case "E":
+                            System.out.println();
+                            System.out.print("Gebe die Id an:  ");
+                            id = fromKeyboard.readLine().trim();
+                            serieFindById(Long.parseLong(id));
+                            break;
+                        case "F":
+                            System.out.println();
+                            System.out.print("Gebe die Id an:  ");
+                            id = fromKeyboard.readLine().trim();
+                            movieFindById(Long.parseLong(id));
+                            break;
+                        case "G":
+                            System.out.println();
+                            System.out.print("Gebe den Titel an:  ");
+                            title = fromKeyboard.readLine().trim();
+                            title = title.isEmpty() ? null : title;
+                            System.out.print("Gebe das Genre an:  ");
+                            genre = fromKeyboard.readLine().trim();
+                            genre = genre.isEmpty() ? null : genre;
+                            System.out.print("Gebe den Status an:  ");
+                            status = fromKeyboard.readLine().trim();
+                            status = status.isEmpty() ? null : status;
+                            mediaFind(title,genre,status);
+                            break;
+                        case "H":
+                            System.out.println();
+                            System.out.print("Gebe den Titel an:  ");
+                            title = fromKeyboard.readLine().trim();
+                            title = title.isEmpty() ? null : title;
+                            System.out.print("Gebe das Genre an:  ");
+                            genre = fromKeyboard.readLine().trim();
+                            genre = genre.isEmpty() ? null : genre;
+                            System.out.print("Gebe den Status an:  ");
+                            status = fromKeyboard.readLine().trim();
+                            status = status.isEmpty() ? null : status;
+                            serieFind(title,genre,status);
+                            break;
+                        case "I":
+                            System.out.println();
+                            System.out.print("Gebe den Titel an:  ");
+                            title = fromKeyboard.readLine().trim();
+                            title = title.isEmpty() ? null : title;
+                            System.out.print("Gebe das Genre an:  ");
+                            genre = fromKeyboard.readLine().trim();
+                            genre = genre.isEmpty() ? null : genre;
+                            System.out.print("Gebe den Status an:  ");
+                            status = fromKeyboard.readLine().trim();
+                            status = status.isEmpty() ? null : status;
+                            movieFind(title,genre,status);
+                            break;
+                        case "X":
+                            System.out.println("Bye, bye!");
+                            quit = true;
+                            break;
+                    }
+                }
+            }
+            catch(JsonSyntaxException e){
+                logedIn=false;
+                System.out.println("Authentication Fehler: Bitte geben Sie richte Daten ein");
             }
                  
         }
@@ -179,6 +188,11 @@ public class Main {
                 
                  System.out.println();
             }
+            catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
+            }
     }
 
     private static void mediaFindById(long id) throws UnirestException, WebAppException{
@@ -204,6 +218,11 @@ public class Main {
                 System.out.println("Nix gefunden!!!");  
                 
                  System.out.println();
+            }
+            catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
 
            
@@ -235,10 +254,13 @@ public class Main {
             }
             }
             catch(NullPointerException nle){
-                
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
-                
+            }
+            catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
     
@@ -276,6 +298,10 @@ public class Main {
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
                 
+            }catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
 
@@ -311,6 +337,11 @@ public class Main {
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
                 
+            }
+            catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
     private static void serieFind(String title, String genre, String status) throws UnirestException, WebAppException{
@@ -351,6 +382,11 @@ public class Main {
                  System.out.println();
                 
             }
+            catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
+            }
     }
     
     
@@ -386,6 +422,10 @@ public class Main {
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
                 
+            }catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
 
@@ -419,6 +459,10 @@ public class Main {
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
                 
+            }catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
     private static void movieFind(String title, String genre, String status) throws UnirestException, WebAppException{
@@ -454,6 +498,10 @@ public class Main {
                 System.out.print("Nix gefunden!!!");
                  System.out.println();
                 
+            }catch(WebAppException e){
+                System.err.println("Es ist eine WebAppException "
+                        + "\nvlt. dies könnte daran liegen, das etwas mit Ihrer Eingabe nicht stimmt"
+                        + "\n\n");
             }
     }
     
