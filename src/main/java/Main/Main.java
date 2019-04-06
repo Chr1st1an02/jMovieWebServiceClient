@@ -215,6 +215,7 @@ public class Main {
                 System.out.println("Type:        "+ media.getType());
                 System.out.println("Titel:       " + media.getTitle());
                 System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                System.out.print("Genre: ");
                 media.getGenres().forEach((genre) -> {
                     System.out.print(genre.getName()+" ");
                 });
@@ -257,6 +258,7 @@ public class Main {
                     System.out.println("Type:        "+ media.getType());
                     System.out.println("Titel:       " + media.getTitle());
                     System.out.println("Angelegt von:   " + media.getOwner().getUsername());
+                    System.out.print("Genre: ");
                     media.getGenres().forEach((mgenre) -> {
                         System.out.print(mgenre.getName()+" ");
                     });
@@ -294,6 +296,7 @@ public class Main {
                     System.out.println("Type:        "+ serie.getType());
                     System.out.println("Titel:       " + serie.getTitle());
                     System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                    System.out.print("Genre: ");
                     serie.getGenres().forEach((genre) -> {
                         System.out.print(genre.getName()+" ");
                     });
@@ -338,6 +341,7 @@ public class Main {
                 System.out.println("Type:        "+ serie.getType());
                 System.out.println("Titel:       " + serie.getTitle());
                 System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                System.out.print("Genre: ");
                 serie.getGenres().forEach((genre) -> {
                         System.out.print(genre.getName()+" ");
                     });
@@ -385,6 +389,7 @@ public class Main {
                     System.out.println("Type:        "+ serie.getType());
                     System.out.println("Titel:       " + serie.getTitle());
                     System.out.println("Angelegt von:   " + serie.getOwner().getUsername());
+                    System.out.print("Genre: ");
                     serie.getGenres().forEach((sgenre) -> {
                         System.out.print(sgenre.getName()+" ");
                     });
@@ -434,6 +439,7 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    System.out.print("Genre: ");
                     movie.getGenres().forEach((genre) -> {
                         System.out.print(genre.getName()+" ");
                     });
@@ -474,6 +480,7 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    System.out.print("Genre: ");
                     movie.getGenres().forEach((genre) -> {
                         System.out.print(genre.getName()+" ");
                     });
@@ -517,6 +524,7 @@ public class Main {
                     System.out.println("Titel:       " + movie.getTitle());
                     System.out.println("Angelegt von:   " + movie.getOwner().getUsername());
                     System.out.println("Dauer:   " + movie.getMovieLength());
+                    System.out.print("Genre: ");
                     movie.getGenres().forEach((mgenre) -> {
                         System.out.print(mgenre.getName()+" ");
                     });
